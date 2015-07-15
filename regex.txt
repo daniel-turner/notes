@@ -1,0 +1,65 @@
+() grouping
+[] sets, character sets
+  [a-f]
+
+{} quantities, how many of the previous character
+  - {3} only 3
+  - {3,10} range 3-10
++ one or more
+* zero or more
+? zero or one
+
+^ beginning
+$ end
+. any character
+period must be escaped \.
+
+\w word
+\W not word
+
+\b word boundary is any whitespace or punctuation
+
+/([a-zA-Z]+ & [a-zA-Z]+)/g
+  selects word on either side of &, inclusive
+  same as /\w+ & \w+)/g
+
+\s tabs, spaces, newlines
+\S not tabs,spaces, newlines
+\d digit
+\D not digit
+
+/[\w\d\.\-_]+@[\w\d\.\-_]+/g emails
+
+</?\w+ \S+> html tags w/ attributes
+
+
+*************************************JAVASCRIPT***************************************
+
+var text ="Welcome to RegExr v2.0 by gskinner.com!\
+\
+Edit the Expression & Text to see matches. Roll over matches or the expression for details. Undo mistakes with ctrl-z. Save & Share expressions with friends or the Community. A full Reference & Help is available in the Library, or watch the video Tutorial.\
+\
+Sample text for testing:\
+abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+0123456789 +-.,!@#$%^&*();/|<>'\
+12345 -98.7 3.141 .6180 9,000 +42\
+555.123.4567  +1-(800)-555-2468\
+foo@demo.net  bar.ba@test.co.uk\
+p0tat0@gmai-fake.com\
+www.demo.com  http://foo.co.uk/\
+http://regexr.com/foo.html?q=bar";
+
+var expr1 = /\b\w{3}\b/gm;
+
+var expr2 = new RegExp("\\b\\w{3}\\b", "gm");
+console.log(expr1.test(text));
+
+var result1 = expr1.exec(text);
+var results = [];
+
+while(result1 !== null) {
+
+    results.push(result1[0] );
+    result1 = expr1.exec(text);
+}
+console.log(results);

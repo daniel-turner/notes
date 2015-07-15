@@ -1,0 +1,182 @@
+daemon, port 5432
+
+-----
+
+Postgres server login from command line:
+
+  [safer] sudo su -c 'su postgres -c psql'
+
+  OR
+
+  sudo su
+  su postgres -c psql
+
+-----
+
+start server
+
+  [sudo] service start postgresql
+
+-----
+
+kill server
+
+  [sudo] service stop postgresql
+
+  OR
+
+  ps fax | grep postgres [get pid]
+  kill -9 [pid]
+
+-----
+
+quit from psql cli
+
+\q
+
+-----
+
+use 'as' to alias a field or result with a new name
+
+select 1+1 as the_sum;
+
+-----
+
+list databases, relations
+
+\d
+
+-----
+
+list databases
+
+\l
+
+-----
+
+create user
+
+CREATE user [username][options];
+CREATE user deleteme;
+
+CREATE USER [username] WITH ENCRYPTED PASSWORD ['password'];
+CREATE USER snacks_admin WITH ENCRYPTED PASSWORD 'cookies';
+
+-----
+
+delete user
+
+drop user [username];
+drop user deleteme;
+
+-----
+list users
+
+\du
+
+-----
+
+create database
+
+CREATE DATABASE [db name][options]
+CREATE DATABASE snacks ENCODING 'utf8';
+
+CREATE DATABASE [dbname] WITH OWNER [username] ENCODING [encoding];
+CREATE DATABASE snacks WITH OWNER snacks_admin ENCODING 'utf8';
+
+-----
+delete database
+
+DROP DATABASE [dbname];
+DROP DATABASE cereals;
+
+-----
+
+set database owner to user
+
+ALTER DATABASE [dbname] OWNER TO [username];
+ALTER DATABASE snacks OWNER TO snacks_admin;
+
+-----
+
+describe table
+/dS [tablename]
+/dS items
+
+-----
+
+'items' table
+id    : unsigned integer, unique, auto incrementing, not null
+name  : varchar(21), unique, not null
+tastiness   : unsigned integer, DEFAULT NULL
+description : text
+created_at : timestamp without timezone (tz = time zone), not null
+
+CREATE TABLE items --first test
+(
+  id integer NOT NULL,
+  name varchar(21) NOT NULL,
+  tastiness integer DEFAULT NULL,
+  description text,
+  created_at timestamp without time zone NOT NULL
+);
+
+CREATE TABLE items --second test, id is unique and auto incrementing, PK
+(
+  id serial,
+  name varchar(21) NOT NULL,
+  tastiness integer DEFAULT NULL,
+  description text,
+  created_at timestamp without time zone NOT NULL DEFAULT NOW(),
+  UNIQUE (name),
+  PRIMARY KEY (id)
+);
+
+-----
+
+delete table
+
+DROP TABLE [tablename];
+DROP TABLE items;
+
+-----
+
+create record
+
+INSERT INTO items VALUES (DEFAULT, 'Nibblers', 3, 'Salted Sourdough Pretzel', NOW());
+
+INSERT INTO items (name,description,created_at)
+  VALUES('Sour Patch Kids', 'Candy', NOW());
+
+-----
+
+view data
+
+SELECT * FROM items
+
+SELECT name, tastiness FROM items;
+
+SELECT name, tastiness FROM items WHERE tastiness > 3;
+
+-----
+
+update record
+
+UPDATE items SET tastiness = 4 WHERE id = 4;
+
+-----
+
+delete record
+
+DELETE FROM items WHERE id=4;
+
+-----
+average
+
+SELECT AVG(tastiness) FROM items;
+SELECT AVG(tastiness) as base_tastiness, AVG(tastiness+1) as optimistic_average FROM items;
+
+-----
+sum
+
+SELECT SUM(tastiness) FROM items;

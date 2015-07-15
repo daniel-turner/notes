@@ -1,0 +1,11 @@
+git checkout -b <name> //creates a new branch name
+git checkout <hash(min first 7 chars)> // goes to a different commit
+git diff //shows changes
+git diff <hash> // compares current HEAD to hash
+git diff <hash1>...<hash2>
+git diff HEAD...master
+git diff --cached // uses the cached changes (not commited)
+git reset // unstages files
+git checkout <filename> // reverts to file at last clean commit. Aborts changes
+git branch -d <name> //deletes the branch
+git checkout <hash> <file> //bring file from one commit into the current commit

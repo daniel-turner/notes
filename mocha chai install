@@ -1,0 +1,9 @@
+mocha chai install
+
+npm init
+npm install -D mocha chai
+
+var chai = require("chai");
+var generator = require("../js/generator.js");
+var should = chai.should();
+var expect = chai.expect;
