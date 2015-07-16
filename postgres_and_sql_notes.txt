@@ -180,3 +180,9 @@ SELECT AVG(tastiness) as base_tastiness, AVG(tastiness+1) as optimistic_average 
 sum
 
 SELECT SUM(tastiness) FROM items;
+
+-----
+
+subqueries
+
+SELECT COUNT(ms.model_code) FROM (SELECT model_code FROM car_models WHERE make_code = 'LAM') AS ms;
