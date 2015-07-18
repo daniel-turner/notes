@@ -1,0 +1,5 @@
+npm init
+npm i -g sequelize-cli
+npm i -S sequelize
+sequelize init
+npm i -S pg pg-hstore
