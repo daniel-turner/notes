@@ -1,0 +1,4 @@
+es6 objects
+review of encapsulation(?) strategies esp. in re: web deployments and w/ node
+sass & bower setup and overview of how to set up with other packages like foundation et al.
+overview of other web app stacks like python/django, ruby/rails, etc. in relation to what we've learned; pros and cons
